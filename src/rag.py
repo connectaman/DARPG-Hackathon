@@ -59,15 +59,14 @@ class ChatBot:
         to resolve their query.
 
         SOURCES:
-        {source}
+        {sources}
 
         CONTACT:
         {contact}
 
         Question or Query : {query}
         """
-
-        self.messages.append({"role": "user", "content": template})
+        self.messages = [{"role": "user", "content": template}]
         stream = self.llm.chat.completions.create(
             model="gpt-4-turbo-preview",
             messages=self.messages,
@@ -78,8 +77,4 @@ class ChatBot:
         response = response.replace("\n","<br>")
         response = response.replace("\\n","<br>")
         return response
-        # response = self.llm.ChatCompletion.create(model="gpt-4-turbo-preview",messages=self.messages,temperature=0)['choices'][0]['message']['content']
-        # self.messages.append({"role": "assistant", "content": response})
-
-        # return response
  

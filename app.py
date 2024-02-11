@@ -11,16 +11,22 @@ import os
 import logging
 logging.basicConfig(format='%(asctime)s | %(levelname)s: %(message)s', level=logging.INFO)
 
+app = Flask(__name__)
+
 logging.info(" Loading Documents")
 extractor = PDFExtractor(pdf_path="/workspaces/DARPG-Hackathon/data/pdf")
+logging.info(" Loading Documents Complete ")
+logging.info(" Creating Chunks ")
 chunker = Chunk()
+logging.info(" Creating Chunks Complete")
+logging.info(" Started Embedding ")
 bge = BGEEmbedder()
+logging.info(" Embedding Complete")
 dense = DenseRetriever(embedder=bge)
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY",""))
 chat = ChatBot(extractor=extractor,chunker=chunker,embedder=bge,retriever=dense,llm=client)
 logging.info(" Object Creation Done")
 
-app = Flask(__name__)
 
 @app.route("/chatbot")
 def home():

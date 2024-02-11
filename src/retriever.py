@@ -5,17 +5,6 @@ import faiss
 
 class DenseRetriever():
     def __init__(self, embedder, **kwargs) -> None:
-        """
-        Initializes the class with the given chunks and documents.
-
-        Parameters:
-            chunks (List[Chunk]): List of Chunk objects.
-            documents (List[Document]): List of Document objects.
-            **kwargs: Additional keyword arguments.
-
-        Returns:
-            None
-        """
         self.embedder = embedder
 
     def retrieve(
@@ -26,19 +15,6 @@ class DenseRetriever():
         top_k: int = 10,
         **kwargs
     ) -> List[Union[Document]]:
-        """
-        Retrieves and returns a list of chunks or documents based on the given query and embedding model.
-
-        Args:
-            query (str): The query string to retrieve chunks or documents.
-            embedder: The embedding model to use for retrieving chunks or documents.
-            similarity_score (float): The similarity score threshold. Defaults to 0.6.
-            top_k (int): The maximum number of chunks or documents to return. Defaults to 10.
-            **kwargs: Additional keyword arguments.
-
-        Returns:
-            List[Union[Chunk, Document]]: The list of chunks or documents based on the query and embedding model.
-        """
       
         self.documents = documents
         if self.documents is not None:

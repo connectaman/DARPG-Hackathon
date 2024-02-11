@@ -16,7 +16,6 @@ class PDFExtractor():
         self.path = pdf_path
         self.documents = []
 
-    @lru_cache
     def _extract_text(self):
         for p in os.listdir(self.path):
             reader = PdfReader(os.path.join(self.path,p))
@@ -25,7 +24,6 @@ class PDFExtractor():
                     self.documents.append(Document(page_content=page.extract_text()))
         return self.documents
 
-    @lru_cache
     def _extract_table(self):
         dfs = tabula.read_pdf(self.path, pages='all')
         res_df = []
@@ -34,7 +32,6 @@ class PDFExtractor():
             res_df.append(df)
         return res_df
 
-    @lru_cache
     def _df_to_table(
         pandas_dataframe: pd.DataFrame,
         rich_table: Table,
@@ -57,7 +54,6 @@ class PDFExtractor():
 
         return rich_table
 
-    @lru_cache
     def extract(self):
         text_content = self._extract_text()
         return text_content

@@ -167,12 +167,24 @@ def scrape_about_paragraphs(url):
 
 
 # Example usage
-# print(scrape_table_with_pagination(url="https://pgportal.gov.in/Home/NodalPgOfficers"))
-# print(scrape_table_with_pagination(url="https://pgportal.gov.in/Home/NodalPgOfficersState"))
-# print(scrape_table_with_pagination(url="https://pgportal.gov.in/Home/NodalAuthorityForAppeal"))
+data = []
+data.extend(scrape_table_with_pagination(url="https://pgportal.gov.in/Home/NodalPgOfficers"))
+data.extend(scrape_table_with_pagination(url="https://pgportal.gov.in/Home/NodalPgOfficersState"))
+data.extend(scrape_table_with_pagination(url="https://pgportal.gov.in/Home/NodalAuthorityForAppeal"))
 
 
-#print(scrape_faq_from_pgportal(url='https://pgportal.gov.in/Home/Faq'))
+data.extend(scrape_faq_from_pgportal(url='https://pgportal.gov.in/Home/Faq'))
     
 
-# print(scrape_about_paragraphs(url="https://pgportal.gov.in/Home/AboutUs"))
+data.extend(scrape_about_paragraphs(url="https://pgportal.gov.in/Home/AboutUs"))
+
+final_data = ''
+
+for d in data:
+    if isinstance(d,str):
+        final_data += d +"\n\n"
+    else:
+        final_data += d["text"] +"\n\n"
+
+with open("/workspaces/DARPG-Hackathon/data/website.txt","w") as f:
+    f.write(final_data)

@@ -2,7 +2,7 @@ from src.schemas import Document
 from typing import List, Union
 from transformers import AutoTokenizer, AutoModel
 import torch
-
+import requests, json, ast ,re
 
 class BGEEmbedder():
     def __init__(
