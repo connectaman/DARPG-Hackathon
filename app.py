@@ -8,13 +8,17 @@ from openai import OpenAI
 from flask import Flask, render_template, request
 import os
 
+import logging
+logging.basicConfig(format='%(asctime)s | %(levelname)s: %(message)s', level=logging.INFO)
+
+logging.info(" Loading Documents")
 extractor = PDFExtractor(pdf_path="/workspaces/DARPG-Hackathon/data/pdf")
 chunker = Chunk()
 bge = BGEEmbedder()
 dense = DenseRetriever(embedder=bge)
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY",""))
 chat = ChatBot(extractor=extractor,chunker=chunker,embedder=bge,retriever=dense,llm=client)
-
+logging.info(" Object Creation Done")
 
 app = Flask(__name__)
 
