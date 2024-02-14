@@ -84,7 +84,7 @@ python app.py
 
 ### Video Demo
 
-![Video Demo](https://www.youtube.com/watch?v=fes7HtuBFFM)
+![Video Demo]([https://www.youtube.com/watch?v=fes7HtuBFFM](https://youtu.be/fes7HtuBFFM))
 
 
 
